@@ -19,7 +19,7 @@ except (ImportError, IOError):
 import myPyApps
 
 setup(
-    name='pyBackup',
+    name='pyBatch',
     version='.'.join(map(str, myPyApps.__version__)),
     packages=find_packages(),
 
@@ -29,10 +29,10 @@ setup(
 
     author='Fabrice Douchant',
     author_email='fabrice.douchant@gmail.com',
-    description='Backup utility using rync underneath',
+    description='Allow to run batch surrounded by automated reporting, emailing, ... support.',
     long_description=long_description,
     license='GNU GPLv3',
-    keywords='tools backup',
+    keywords='tools batch',
     # url="http://fabrice.douchant.com/mypyapps-framework-for-python-developments?lang=en",
 
     requires=['myPyApps'],
