@@ -1,1 +1,11 @@
 [DEFAULT]
+email_on_success = False ; on success generate log message and email
+email_on_error = True ; on error generate log message and email
+console_stdout = True ; display stdout on console
+console_stderr = True ; display stderr on console
+fail_on_error = True ; fail script if command fail
+shell = False ; the only time you need to specify shell=True on Windows is when the command you wish to execute is built into the shell (e.g. dir or copy). You do not need shell=True to run a batch file or console-based executable. (ref. subprocess Python doc)
+
+;[ping]
+;command = ping -n 2 127.0.0.1
+;email_on_success = True
