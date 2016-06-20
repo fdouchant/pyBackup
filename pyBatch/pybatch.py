@@ -7,6 +7,14 @@ LOGGER = mylogging.getLogger(__name__)
 class PyBatch(myapp.MyApp):
 
     def main(self):
+        if self.get_option('list'):
+            if self.CONFIG.sections():
+                print "Configuration sections are :"
+                print "\n".join(self.CONFIG.sections())
+            else:
+                print "No configuration section are defined."
+            return None
+
         section = self.get_option("section")
         # validate section
         if section not in self.CONFIG.sections():
