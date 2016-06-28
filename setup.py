@@ -16,15 +16,15 @@ except (ImportError, IOError):
     print("Can't use spip article as description, use README.txt instead")
     long_description = open('README.txt').read()
 
-import myPyApps
+import pyBatch
 
 setup(
     name='pyBatch',
-    version='.'.join(map(str, myPyApps.__version__)),
+    version='.'.join(map(str, pyBatch.__version__)),
     packages=find_packages(),
 
     package_data={
-        'myPyApps': ['config/*.default', 'logs/.empty'],
+        'pyBatch': ['config/*.default', 'logs/.empty'],
     },
 
     author='Fabrice Douchant',
@@ -33,8 +33,9 @@ setup(
     long_description=long_description,
     license='GNU GPLv3',
     keywords='tools batch',
-    # url="http://fabrice.douchant.com/mypyapps-framework-for-python-developments?lang=en",
+    url="http://fabrice.douchant.com/pybatch-shell-batch-manager?lang=en",
 
+    zip_safe= False,
     requires=['myPyApps'],
-    scripts=[]
+    scripts=['batch.py']
 )
