@@ -9,10 +9,10 @@ class PyBatch(myapp.MyApp):
     def main(self):
         if self.get_option('list'):
             if self.CONFIG.sections():
-                print "Configuration sections are :"
-                print "\n".join(self.CONFIG.sections())
+                print("Configuration sections are :")
+                print("\n".join(self.CONFIG.sections()))
             else:
-                print "No configuration section are defined."
+                print("No configuration section are defined.")
             return None
 
         section = self.get_option("section")
@@ -50,7 +50,7 @@ class PyBatch(myapp.MyApp):
             LOGGER.info("[dry-run] should have run command %r for section %r" % (_args, section))
             return
 
-        with tempfile.NamedTemporaryFile(prefix=section+'_', suffix='.txt') as file:
+        with tempfile.NamedTemporaryFile(mode='r+t', prefix=section+'_', suffix='.txt') as file:
             LOGGER.debug("create temporary file %r" % file.name)
             proc = subprocess.Popen(_args, shell=_shell, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             with proc.stdout, proc.stderr:
