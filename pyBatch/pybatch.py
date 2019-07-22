@@ -54,16 +54,22 @@ class PyBatch(myapp.MyApp):
             LOGGER.debug("create temporary file %r" % file.name)
             proc = subprocess.Popen(_args, shell=_shell, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             with proc.stdout, proc.stderr:
-                for line in iter(proc.stdout.readline, b''):
+                while True:
+                    # process stdout
+                    stdout_line = proc.stdout.readline()
                     if _console_stdout:
-                        sys.stdout.write(line)
-                    file.write(line)
-                for line in iter(proc.stderr.readline, b''):
+                        sys.stdout.write(stdout_line)
+                    file.write(stdout_line)
+                    # process stderr
+                    stderr_line = proc.stderr.readline()
                     if _console_stderr:
-                        sys.stderr.write(line)
-                    file.write(line)
-            proc.wait()
-            status = proc.returncode
+                        sys.stderr.write(stderr_line)
+                    file.write(stderr_line)
+                    # allow all output to be processed
+                    if stdout_line == '' and stderr_line == '' and proc.poll() is not None:
+                        break
+            # get status
+            status = proc.wait()
             file.seek(0)
             LOGGER.debug("done with command for section %r with status %r" % (section, status))
             if not self.get_option(myargparse.QUIET):
